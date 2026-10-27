@@ -94,6 +94,16 @@
 .counsel-form input, .counsel-form textarea, .counsel-form select { width: 100%; padding: 15px; border: 1px solid var(--line); background: transparent; color: var(--ink); font: 16px Poppins, MiSans, sans-serif; }
 .counsel-form button { justify-self: start; }
 .counsel-prose { max-width: 900px; margin: auto; }
+.counsel-programme-hero { background: var(--ink); color: var(--paper); text-align: center; padding: 36px 6% 60px; }
+.counsel-programme-hero h1 { max-width: 540px; margin: 28px auto 18px; }
+.counsel-programme-hero > div:first-child > p:last-child { max-width: 540px; margin: 0 auto; line-height: 1.7; }
+.counsel-programme-options { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 810px; margin: 56px auto 0; text-align: left; }
+.counsel-programme-options article { display: flex; flex-direction: column; padding: 32px; border-radius: 4px; background: #172a20; }
+.counsel-programme-options article:first-child { background: #e3e0d0; color: var(--ink); }
+.counsel-programme-options h2 { font: 400 25px Georgia, MiSans, serif; margin: 0; }
+.counsel-programme-options p { line-height: 1.7; flex: 1; }
+.counsel-programme-options .counsel-action { display: block; text-align: center; background: #2e4437; color: var(--paper); }
+.counsel-programme-options article:first-child .counsel-action { background: var(--ink); }
 .counsel-dark .counsel-cards { border-color: #45564b; }
 .counsel-dark .counsel-cards > div { border-color: #45564b; }
 .counsel-origin { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 8%; }
@@ -106,7 +116,7 @@
 @media (max-width: 800px) { .counsel-cards, .counsel-membership { grid-template-columns: repeat(2, minmax(0, 1fr)); } .counsel-hero { background-position: 60% center; } }
 @media (max-width: 800px) { .counsel-team { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 520px) { .counsel-cards, .counsel-membership, .counsel-quotes, .counsel-form-grid { grid-template-columns: 1fr; } .counsel-stats { flex-wrap: wrap; gap: 25px; } .counsel-title, .counsel-section { padding: 60px 20px; } .counsel-hero { background: var(--ink); } .counsel-hero-content { padding: 40px 20px 60px; text-align: center; } .counsel-hero .counsel-action { width: 100%; } .counsel-hero blockquote { text-align: left; } }
-@media (max-width: 520px) { .counsel-origin { grid-template-columns: 1fr; gap: 28px; } }
+@media (max-width: 520px) { .counsel-origin, .counsel-programme-options { grid-template-columns: 1fr; gap: 28px; } }
 @media (max-width: 520px) { .counsel-marketplace { right: max(14px, env(safe-area-inset-right)); bottom: max(14px, env(safe-area-inset-bottom)); min-height: 42px; } .counsel-marketplace span { display: none; } }
 @media (max-width: 800px) { .counsel-article-body, .counsel-journal-list article, .counsel-newsletter { grid-template-columns: 1fr; } .counsel-article-body aside { border-right: 0; border-bottom: 1px solid var(--line); padding: 30px 6%; } .counsel-article-body > div { padding: 35px 6%; } .counsel-article-meta { flex-direction: column; } }
 @media (max-width: 800px) { .counsel-header { min-height: 62px; padding: 0 20px; } .counsel-menu { display: block; } .counsel-nav { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--ink); padding: 25px; flex-direction: column; align-items: flex-start; } .counsel-nav.open { display: flex; } .counsel-footer { grid-template-columns: 1fr; } }

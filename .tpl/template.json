@@ -1,0 +1,87 @@
+{
+  "$schema": "./schemas/template.schema.json",
+  "format": "git-template",
+  "formatVersion": "0.2.0",
+  "id": "counsel",
+  "version": "0.1.0",
+  "name": "The Counsel",
+  "gitUrl": "https://github.com/weelume/counsel-template",
+  "sceneId": "corporate-site",
+  "listed": false,
+  "tags": [
+    "咨询服务",
+    "中英文",
+    "响应式"
+  ],
+  "summary": "面向创始人与领导者的咨询服务网站开发版本",
+  "accentColor": "#a88742",
+  "cover": null,
+  "screenshots": [],
+  "surfaces": [
+    {
+      "id": "site",
+      "name": "站点",
+      "platform": "pc",
+      "locales": [
+        "zh",
+        "en"
+      ],
+      "pages": [
+        {
+          "slug": "",
+          "title": "首页"
+        },
+        {
+          "slug": "about",
+          "title": "关于"
+        },
+        {
+          "slug": "inside",
+          "title": "服务详情"
+        },
+        {
+          "slug": "programmes",
+          "title": "服务项目"
+        },
+        {
+          "slug": "journal",
+          "title": "文章"
+        },
+        {
+          "slug": "journal/the-advice-trap",
+          "title": "建议的陷阱"
+        },
+        {
+          "slug": "journal/change-is-behavioural",
+          "title": "改变与行为"
+        },
+        {
+          "slug": "journal/a-room-that-holds",
+          "title": "安全的对话空间"
+        },
+        {
+          "slug": "journal/seasons-not-sessions",
+          "title": "阶段与会谈"
+        },
+        {
+          "slug": "enquire",
+          "title": "预约对话"
+        },
+        {
+          "slug": "contact",
+          "title": "联系"
+        },
+        {
+          "slug": "privacy",
+          "title": "隐私"
+        }
+      ]
+    }
+  ],
+  "license": {
+    "type": "unlicensed",
+    "file": "docs/LICENSE.md",
+    "summary": "待作者确认源码与素材授权范围。",
+    "redistributionAllowed": false
+  }
+}

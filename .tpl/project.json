@@ -1,0 +1,23 @@
+{
+  "$schema": "./schemas/project.schema.json",
+  "format": "git-template-project",
+  "formatVersion": "0.2.0",
+  "stage": "scaffold",
+  "toolchain": {
+    "runtime": "node",
+    "runtimeVersionFile": ".nvmrc",
+    "packageManager": "pnpm",
+    "packageManagerSource": "package.json",
+    "lockfile": null
+  },
+  "environment": {
+    "schema": ".tpl/contracts/env.schema.json",
+    "example": ".env.example"
+  },
+  "customization": ".tpl/customization.json",
+  "requirements": {},
+  "previews": [],
+  "operations": {},
+  "services": {},
+  "checks": []
+}

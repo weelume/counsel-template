@@ -47,7 +47,7 @@ export function Shell({ locale, children }: { locale: Locale; children: ReactNod
       window.removeEventListener('resize', schedule)
       root.classList.remove('counsel-active', 'counsel-scroll-dark')
     }
-  }, [pathname])
+  }, [pathname, expanded])
   useEffect(() => {
     if (!expanded) return
     const previousOverflow = document.body.style.overflow, previousPadding = document.body.style.paddingRight

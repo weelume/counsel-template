@@ -26,11 +26,33 @@ export function Shell({ locale, children }: { locale: Locale; children: ReactNod
   const pathname = usePathname(), router = useRouter(), query = useSearchParams().toString()
   const target = (path: string) => pageHref(basePath, locale, path)
   const expanded = open && mobile
-  useEffect(() => { document.documentElement.classList.add('counsel-active'); return () => { document.documentElement.classList.remove('counsel-active') } }, [])
+  useEffect(() => {
+    const root = document.documentElement
+    root.classList.add('counsel-active')
+    let frame = 0
+    // 取导航下方靠近右边缘的可见区块，配色随内容切换；只在滚动帧中采样，不接管滚动。
+    const updateTone = () => {
+      frame = 0
+      const y = (header.current?.getBoundingClientRect().bottom ?? 0) + 1
+      const element = document.elementFromPoint(root.clientWidth - 1, y)
+      root.classList.toggle('counsel-scroll-dark', Boolean(element?.closest('.counsel-hero,.counsel-dark,.counsel-programme-hero,.counsel-story,.counsel-footer')))
+    }
+    const schedule = () => { if (!frame) frame = requestAnimationFrame(updateTone) }
+    schedule()
+    window.addEventListener('scroll', schedule, { passive: true })
+    window.addEventListener('resize', schedule)
+    return () => {
+      cancelAnimationFrame(frame)
+      window.removeEventListener('scroll', schedule)
+      window.removeEventListener('resize', schedule)
+      root.classList.remove('counsel-active', 'counsel-scroll-dark')
+    }
+  }, [pathname])
   useEffect(() => {
     if (!expanded) return
     const previousOverflow = document.body.style.overflow, previousPadding = document.body.style.paddingRight
     const gutter = window.innerWidth - document.documentElement.clientWidth
+    document.documentElement.classList.add('counsel-menu-open')
     document.body.style.overflow = 'hidden'
     if (gutter > 0) document.body.style.paddingRight = `${gutter}px`
     nav.current?.querySelector<HTMLAnchorElement>('a')?.focus()
@@ -44,7 +66,7 @@ export function Shell({ locale, children }: { locale: Locale; children: ReactNod
       }
     }
     window.addEventListener('keydown', onKey)
-    return () => { document.body.style.overflow = previousOverflow; document.body.style.paddingRight = previousPadding; window.removeEventListener('keydown', onKey) }
+    return () => { document.documentElement.classList.remove('counsel-menu-open'); document.body.style.overflow = previousOverflow; document.body.style.paddingRight = previousPadding; window.removeEventListener('keydown', onKey) }
   }, [expanded])
   const close = () => setOpen(false)
   const switchLanguage = () => { router.push(languageHref(pathname, basePath, locale === 'zh' ? 'en' : 'zh', query, window.location.hash)); close() }

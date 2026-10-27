@@ -4,6 +4,11 @@
 @font-face { font-family: CounselPoppins; src: url('/templates/counsel/fonts/poppins-latin-600.woff2') format('woff2'); font-weight: 600; font-display: swap; }
 @font-face { font-family: CounselPoppins; src: url('/templates/counsel/fonts/poppins-latin-700.woff2') format('woff2'); font-weight: 700; font-display: swap; }
 .counsel, .counsel * { box-sizing: border-box; }
+html.counsel-active { scrollbar-width: thin; scrollbar-color: #a69f8d #efede3; }
+html.counsel-active::-webkit-scrollbar { width: 9px; }
+html.counsel-active::-webkit-scrollbar-track { background: #efede3; }
+html.counsel-active::-webkit-scrollbar-thumb { background: #a69f8d; border-radius: 8px; border: 2px solid #efede3; }
+html.counsel-active::-webkit-scrollbar-thumb:hover { background: #7f796b; }
 .counsel { --ink: #0e1a14; --paper: #efede3; --gold: #a88742; --line: #d7d0bd; background: var(--paper); color: var(--ink); font-family: CounselPoppins, MiSans, sans-serif; min-height: 100vh; }
 .counsel a { color: inherit; text-decoration: none; }
 .counsel-header { background: var(--ink); color: var(--paper); display: flex; min-height: 64px; align-items: center; justify-content: space-between; padding: 0 5%; position: relative; z-index: 10; }
@@ -11,7 +16,7 @@
 .counsel-brand img { width: 24px; height: 24px; object-fit: contain; vertical-align: middle; margin-right: 6px; }
 .counsel-marketplace { position: fixed; z-index: 30; right: 24px; bottom: 24px; display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 14px; color: var(--paper); background: var(--ink); border: 1px solid #45564b; border-radius: 10px; box-shadow: 0 6px 24px #0003; }
 .counsel-marketplace img { width: 24px; height: 24px; }
-.counsel-nav { display: flex; align-items: center; gap: 28px; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; }
+.counsel-nav { display: flex; align-items: center; gap: 28px; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; scrollbar-width: thin; scrollbar-color: #79887b #0e1a14; }
 .counsel-nav a:hover { color: var(--gold); }
 .counsel-language { color: inherit; background: transparent; border: 0; cursor: pointer; font: inherit; }
 .counsel-menu { display: none; background: transparent; border: 0; width: 44px; height: 44px; padding: 10px; cursor: pointer; }
@@ -119,4 +124,4 @@
 @media (max-width: 520px) { .counsel-origin, .counsel-programme-options { grid-template-columns: 1fr; gap: 28px; } }
 @media (max-width: 520px) { .counsel-marketplace { right: max(14px, env(safe-area-inset-right)); bottom: max(14px, env(safe-area-inset-bottom)); min-height: 42px; } .counsel-marketplace span { display: none; } }
 @media (max-width: 800px) { .counsel-article-body, .counsel-journal-list article, .counsel-newsletter { grid-template-columns: 1fr; } .counsel-article-body aside { border-right: 0; border-bottom: 1px solid var(--line); padding: 30px 6%; } .counsel-article-body > div { padding: 35px 6%; } .counsel-article-meta { flex-direction: column; } }
-@media (max-width: 800px) { .counsel-header { min-height: 62px; padding: 0 20px; } .counsel-menu { display: block; } .counsel-nav { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--ink); padding: 25px; flex-direction: column; align-items: flex-start; } .counsel-nav.open { display: flex; } .counsel-footer { grid-template-columns: 1fr; } }
+@media (max-width: 800px) { .counsel-header { min-height: 62px; padding: 0 20px; } .counsel-menu { display: block; } .counsel-nav { display: none; position: absolute; top: 100%; left: 0; right: 0; max-height: calc(100dvh - 62px); overflow-y: auto; overscroll-behavior: contain; background: var(--ink); padding: 25px; flex-direction: column; align-items: flex-start; } .counsel-nav.open { display: flex; } .counsel-footer { grid-template-columns: 1fr; } }

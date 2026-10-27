@@ -16,6 +16,10 @@ export function Shell({ locale, children }: { locale: Locale; children: ReactNod
   const pathname = usePathname()
   const router = useRouter()
   const query = useSearchParams().toString()
+  useEffect(() => {
+    document.documentElement.classList.add('counsel-active')
+    return () => { document.documentElement.classList.remove('counsel-active') }
+  }, [])
   const prefix = `${basePath}${locale === 'en' ? '/en' : ''}`
   const target = (path: string) => `${prefix}/${path}`.replace(/\/$/, '') || '/'
   // 语言切换保留当前页面、查询参数和锚点。

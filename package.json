@@ -1,7 +1,7 @@
 {
   "name": "counsel-template",
   "private": true,
-  "version": "0.1.0",
+  "version": "1.0.0",
   "type": "module",
   "packageManager": "pnpm@9.15.4",
   "scripts": {
@@ -10,7 +10,9 @@
     "start": "node scripts/next.mjs start",
     "typecheck": "tsc --noEmit",
     "lint": "eslint src",
-    "test": "node --test tests/*.test.mjs"
+    "test": "node --test tests/*.test.mjs",
+    "bundle": "node scripts/bundle.mjs",
+    "tpl:check": "node .tpl/tools/check.mjs ."
   },
   "devDependencies": {
     "@eslint/js": "9.39.4",
@@ -32,11 +34,17 @@
     "./host": "./src/features/counsel/host.tsx",
     "./contact": "./src/features/counsel/pages/ContactPage.tsx",
     "./package.json": "./package.json",
-    "./site": "./src/features/counsel/SitePage.tsx"
+    "./site": "./src/features/counsel/SitePage.tsx",
+    "./template": "./src/features/counsel/template.tsx"
   },
   "files": [
     "src/features/counsel",
-    "public/templates/counsel"
+    "public/templates/counsel",
+    ".tpl/assets",
+    ".tpl/template.json",
+    ".tpl/docs/LICENSE.md",
+    "docs/ASSETS.md",
+    "docs/home-assets.json"
   ],
   "peerDependencies": {
     "framer-motion": "^12.38.0",

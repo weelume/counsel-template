@@ -1,0 +1,18 @@
+'use client'
+import { motion, useReducedMotion } from 'framer-motion'
+import { TextReveal, ease } from '../components/Motion'
+import type { Locale } from '../types'
+import { Title, Cards } from '../components/PracticeSections'
+import { beliefs } from '../content/practice'
+
+export function AboutPage({ locale }: { locale: Locale }) {
+  const i = locale === 'zh' ? 0 : 1
+  const reduced = useReducedMotion()
+  const team = [
+    { name: 'Anand Mehra', role: ['首席顾问', 'Principal Counsel'], photo: 'anand.avif' },
+    { name: 'Rohan Desai', role: ['小组负责人', 'Cohort Lead'], photo: 'rohan.avif' },
+    { name: 'Priya Nair', role: ['咨询顾问', 'Associate Counsel'], photo: 'priya.avif' },
+    { name: 'Maya Rao', role: ['客户关怀', 'Client Care'], photo: 'maya.avif' },
+  ] as const
+  return <><Title locale={locale} eyebrow={['关于我们', 'ABOUT']} title={['为什么需要这样的空间', 'Why this room exists.']} text={['多数领导者不缺建议，缺的是坦诚、私密的咨询：有人说出真相，并在他们行动时继续陪伴。这正是我们工作的意义。', 'Most leaders are not short of advice. They are short of a candid, private counsel who will tell them the truth and stay in the room while they act on it. That is what this practice is for.']} /><section className="counsel-section counsel-dark"><p className="counsel-eyebrow">{i ? 'THE BELIEFS · FOUR BELIEFS' : '四项理念'}</p><Cards items={beliefs} locale={locale} kind="beliefs" /></section><section className="counsel-section counsel-muted counsel-principles"><div><h2>{i ? 'What every engagement rests on.' : '每次合作的基础'}</h2><p>{i ? 'Every engagement rests on the same principles. There are seven. They are practised in the room, not recited. Their themes are named here.' : '每次合作都建立在七项共同原则之上。它们在对话中践行，而非仅仅被念出。'}</p><div className="counsel-membership">{(i ? ['CONFIDENCE', 'CANDOUR', 'ATTENTION', 'READINESS', 'CHALLENGE', 'THE LONG VIEW', 'DEPARTURE WITH GRACE'] : ['信任', '坦诚', '关注', '准备', '挑战', '长远眼光', '从容告别']).map(x => <div key={x}>{x}</div>)}</div></div><div className="counsel-principles-image"><img src="/templates/counsel/principles.png" alt="" /><img src="/templates/counsel/media/241dfc1b99e61ef9.avif" alt="" /></div></section><section className="counsel-story counsel-origin-story" style={{backgroundImage:"url(/templates/counsel/origin.webp)"}}><div className="counsel-story-paper"><h2><TextReveal text={i ? 'Where it began.' : '从何处开始'} characters={!i}/></h2><p>{i ? 'This practice began in New York, driven by years of leading teams and seeing talented individuals struggle without honest guidance. It is based on the idea that regular, meaningful conversations can unlock a person’s potential and has now become a standard approach. Held in New York, and online for those further afield.' : '这项实践始于纽约，源于多年带领团队、见证优秀人才因缺少坦诚指导而困扰的经历。我们相信，定期而有意义的对话能够释放人的潜能。这已成为我们一贯的工作方式。服务在纽约线下进行，也向远方的客户提供线上服务。'}</p><div className="counsel-polaroids">{["origin-photo-1.png","origin-photo-2.jpg","origin-photo-3.png"].map((photo,n)=><motion.figure key={photo} initial={reduced?false:{opacity:0,y:60,rotate:0,scale:0.8}} whileInView={{opacity:1,y:0,rotate:[-5,2,-8][n],scale:1}} viewport={{once:true,amount:0.35}} transition={{duration:0.85,delay:n*0.12,ease}}><img src={`/templates/counsel/${photo}`} alt="" /></motion.figure>)}</div></div></section><section className="counsel-section"><p className="counsel-eyebrow">{i ? 'OUR TEAM' : '我们的团队'}</p><h2>{i ? 'The people behind the practice.' : '团队成员'}</h2><p>{i ? 'The Counsel is a small practice, consisting of a principal counsel and a few trusted associates, all valuing discretion.' : '我们是一支小型团队，由首席顾问和数位值得信赖的伙伴组成，每个人都重视保密。'}</p><div className="counsel-team">{team.map(person => <article key={person.name}><img src={`/templates/counsel/${person.photo}`} alt="" /><h3>{person.name}</h3><p>{person.role[i]}</p></article>)}</div></section></>
+}

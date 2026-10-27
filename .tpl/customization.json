@@ -2,5 +2,132 @@
   "$schema": "./schemas/customization.schema.json",
   "format": "git-template-customization",
   "formatVersion": "0.2.0",
-  "entries": []
+  "entries": [
+    {
+      "id": "brand",
+      "title": "品牌与联系信息",
+      "description": "修改对应内容后同时核对中文、英文和手机布局。",
+      "files": [
+        {
+          "path": "src/features/counsel/config/brand.ts",
+          "kind": "file",
+          "purpose": "品牌与联系信息"
+        }
+      ],
+      "constraints": [
+        "保留中英文、无障碍语义和减少动态效果支持",
+        "表单默认只进行本地校验"
+      ],
+      "checks": [
+        "typecheck",
+        "lint",
+        "build"
+      ]
+    },
+    {
+      "id": "content",
+      "title": "双语内容",
+      "description": "修改对应内容后同时核对中文、英文和手机布局。",
+      "files": [
+        {
+          "path": "src/features/counsel/content",
+          "kind": "directory",
+          "purpose": "双语内容"
+        }
+      ],
+      "constraints": [
+        "保留中英文、无障碍语义和减少动态效果支持",
+        "表单默认只进行本地校验"
+      ],
+      "checks": [
+        "typecheck",
+        "lint",
+        "build"
+      ]
+    },
+    {
+      "id": "theme",
+      "title": "主题与响应式布局",
+      "description": "修改对应内容后同时核对中文、英文和手机布局。",
+      "files": [
+        {
+          "path": "src/features/counsel/theme.css",
+          "kind": "file",
+          "purpose": "主题与响应式布局"
+        }
+      ],
+      "constraints": [
+        "保留中英文、无障碍语义和减少动态效果支持",
+        "表单默认只进行本地校验"
+      ],
+      "checks": [
+        "typecheck",
+        "lint",
+        "build"
+      ]
+    },
+    {
+      "id": "pages",
+      "title": "页面区块和表单",
+      "description": "修改对应内容后同时核对中文、英文和手机布局。",
+      "files": [
+        {
+          "path": "src/features/counsel/pages",
+          "kind": "directory",
+          "purpose": "页面区块和表单"
+        }
+      ],
+      "constraints": [
+        "保留中英文、无障碍语义和减少动态效果支持",
+        "表单默认只进行本地校验"
+      ],
+      "checks": [
+        "typecheck",
+        "lint",
+        "build"
+      ]
+    },
+    {
+      "id": "motion",
+      "title": "文字入场与滚动动效",
+      "description": "修改对应内容后同时核对中文、英文和手机布局。",
+      "files": [
+        {
+          "path": "src/features/counsel/components/Motion.tsx",
+          "kind": "file",
+          "purpose": "文字入场与滚动动效"
+        }
+      ],
+      "constraints": [
+        "保留中英文、无障碍语义和减少动态效果支持",
+        "表单默认只进行本地校验"
+      ],
+      "checks": [
+        "typecheck",
+        "lint",
+        "build"
+      ]
+    },
+    {
+      "id": "routes",
+      "title": "路由与市场元数据",
+      "description": "修改对应内容后同时核对中文、英文和手机布局。",
+      "files": [
+        {
+          "path": "src/features/counsel/template.tsx",
+          "kind": "file",
+          "purpose": "路由与市场元数据"
+        }
+      ],
+      "constraints": [
+        "保留中英文、无障碍语义和减少动态效果支持",
+        "表单默认只进行本地校验"
+      ],
+      "checks": [
+        "typecheck",
+        "lint",
+        "build"
+      ]
+    }
+  ]
 }

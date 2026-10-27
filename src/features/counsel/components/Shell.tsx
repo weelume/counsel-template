@@ -2,53 +2,63 @@
 
 import Link from 'next/link'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { useEffect, useRef, useState, type ReactNode } from 'react'
+import { useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from 'react'
+import { motion, useReducedMotion } from 'framer-motion'
 import { useCounselHost } from '../host'
+import { brand } from '../config/brand'
+import { languageHref, pageHref } from '../routing'
+import { ease } from './Motion'
 import type { Locale } from '../types'
 
 const links = [['programmes', '服务项目', 'Programmes'], ['about', '关于我们', 'About'], ['inside', '服务详情', 'Inside'], ['journal', '文章', 'Journal'], ['enquire', '预约对话', 'Request a conversation']] as const
+const subscribe = (fn: () => void) => { const mq = matchMedia('(max-width: 960px)'); mq.addEventListener('change', fn); return () => mq.removeEventListener('change', fn) }
+const getMobile = () => matchMedia('(max-width: 960px)').matches
 
 export function Shell({ locale, children }: { locale: Locale; children: ReactNode }) {
-  const { basePath = '', brandName = 'The Counsel', logo, marketplaceHref, marketplaceAriaLabel, footerExtra } = useCounselHost()
-  const name = typeof brandName === 'string' ? brandName : (brandName[locale] ?? 'The Counsel')
+  const { basePath = '', brandName = brand.name, logo = brand.logo, marketplaceHref, marketplaceAriaLabel, footerExtra, email = brand.email, phone = brand.phone } = useCounselHost()
+  const name = typeof brandName === 'string' ? brandName : (brandName[locale] ?? brand.name)
+  const reduced = useReducedMotion()
   const [open, setOpen] = useState(false)
+  const mobile = useSyncExternalStore(subscribe, getMobile, () => false)
   const menuButton = useRef<HTMLButtonElement>(null)
-  const pathname = usePathname()
-  const router = useRouter()
-  const query = useSearchParams().toString()
+  const nav = useRef<HTMLElement>(null)
+  const header = useRef<HTMLElement>(null)
+  const pathname = usePathname(), router = useRouter(), query = useSearchParams().toString()
+  const target = (path: string) => pageHref(basePath, locale, path)
+  const expanded = open && mobile
+  useEffect(() => { document.documentElement.classList.add('counsel-active'); return () => { document.documentElement.classList.remove('counsel-active') } }, [])
   useEffect(() => {
-    document.documentElement.classList.add('counsel-active')
-    return () => { document.documentElement.classList.remove('counsel-active') }
-  }, [])
-  const prefix = `${basePath}${locale === 'en' ? '/en' : ''}`
-  const target = (path: string) => `${prefix}/${path}`.replace(/\/$/, '') || '/'
-  // 语言切换保留当前页面、查询参数和锚点。
-  const switchLanguage = () => {
-    const suffix = pathname.slice(basePath.length).replace(/^\/en(?=\/|$)/, '')
-    const next = `${basePath}${locale === 'zh' ? '/en' : ''}${suffix || '/'}`
-    router.push(`${next}${query ? `?${query}` : ''}${window.location.hash}`)
-    setOpen(false)
-  }
-  useEffect(() => {
-    if (!open) return
-    const original = document.body.style.overflow
+    if (!expanded) return
+    const previousOverflow = document.body.style.overflow, previousPadding = document.body.style.paddingRight
+    const gutter = window.innerWidth - document.documentElement.clientWidth
     document.body.style.overflow = 'hidden'
+    if (gutter > 0) document.body.style.paddingRight = `${gutter}px`
+    nav.current?.querySelector<HTMLAnchorElement>('a')?.focus()
     const onKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') { setOpen(false); menuButton.current?.focus() }
+      if (event.key === 'Escape') { event.preventDefault(); setOpen(false); menuButton.current?.focus() }
+      if (event.key === 'Tab') {
+        const elements = [...(header.current?.querySelectorAll<HTMLElement>('a,button') ?? [])].filter(x => x.offsetParent !== null)
+        const first = elements[0], last = elements.at(-1)
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus() }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus() }
+      }
     }
     window.addEventListener('keydown', onKey)
-    return () => { document.body.style.overflow = original; window.removeEventListener('keydown', onKey) }
-  }, [open])
-  return <div className="counsel" lang={locale === 'zh' ? 'zh-CN' : 'en'}>
-    <header className="counsel-header"><Link className="counsel-brand" href={target('')}><img src={logo ?? '/templates/counsel/logo.svg'} alt="" /> {name}</Link>
-      <nav className={open ? 'counsel-nav open' : 'counsel-nav'} aria-label={locale === 'zh' ? '主导航' : 'Main navigation'}>
-        {links.map(([path, zh, en]) => <Link key={path} href={target(path)} onClick={() => setOpen(false)}>{locale === 'zh' ? zh : en}</Link>)}
-        <button className="counsel-language" type="button" onClick={switchLanguage}>{locale === 'zh' ? 'EN' : '中文'}</button>
-      </nav>
-      <button ref={menuButton} className="counsel-menu" type="button" aria-expanded={open} aria-label={open ? (locale === 'zh' ? '关闭菜单' : 'Close menu') : (locale === 'zh' ? '打开菜单' : 'Open menu')} onClick={() => setOpen(!open)}><span /><span /></button>
-    </header>
+    return () => { document.body.style.overflow = previousOverflow; document.body.style.paddingRight = previousPadding; window.removeEventListener('keydown', onKey) }
+  }, [expanded])
+  const close = () => setOpen(false)
+  const switchLanguage = () => { router.push(languageHref(pathname, basePath, locale === 'zh' ? 'en' : 'zh', query, window.location.hash)); close() }
+  const i = locale === 'zh' ? 0 : 1
+  return <div className="counsel" lang={i ? 'en' : 'zh-CN'}>
+    <header ref={header} className="counsel-header"><div className="counsel-header-inner"><Link className="counsel-brand" href={target('')} onClick={close}><img src={logo} alt="" />{name}</Link>
+      <motion.nav ref={nav} id="counsel-navigation" className={`counsel-nav ${expanded ? 'open' : ''}`} aria-label={i ? 'Main navigation' : '主导航'} initial={false} animate={mobile ? { height: expanded ? 'auto' : 0, opacity: expanded ? 1 : 0 } : { height: 'auto', opacity: 1 }} transition={{duration:reduced?0:0.3,ease}} inert={mobile && !expanded}>
+        {links.map(([path, zh, en]) => <Link key={path} className={path === 'enquire' ? 'counsel-nav-cta' : undefined} href={target(path)} onClick={close} aria-current={pathname === target(path) ? 'page' : undefined}>{i ? en : zh}</Link>)}
+        <button className="counsel-language" type="button" onClick={switchLanguage} aria-label={i ? '切换到中文' : 'Switch to English'}>{i ? '中文' : 'EN'}</button>
+      </motion.nav>
+      <button ref={menuButton} className={`counsel-menu ${expanded ? 'open' : ''}`} type="button" aria-controls="counsel-navigation" aria-expanded={expanded} aria-label={expanded ? (i ? 'Close menu' : '关闭菜单') : (i ? 'Open menu' : '打开菜单')} onClick={() => setOpen(!open)}><span /><span /></button>
+    </div></header>
     <main>{children}</main>
-    <footer className="counsel-footer"><div><Link className="counsel-brand" href={target('')}><img src={logo ?? '/templates/counsel/logo.svg'} alt="" />{name}</Link><p>{locale === 'zh' ? '为创始人与领导者提供私密咨询。' : 'Private coaching for founders and leaders.'}</p></div><div><small>{locale === 'zh' ? '探索' : 'THE HOUSE'}</small>{links.map(([path, zh, en]) => <Link key={path} href={target(path)}>{locale === 'zh' ? zh : en}</Link>)}<Link href={target('contact')}>{locale === 'zh' ? '联系我们' : 'Contact'}</Link><Link href={target('privacy')}>{locale === 'zh' ? '隐私' : 'Privacy'}</Link></div><p>© {new Date().getFullYear()} {name}</p>{footerExtra}</footer>
-    {marketplaceHref && <Link className="counsel-marketplace" href={marketplaceHref} aria-label={marketplaceAriaLabel?.[locale] ?? (locale === 'zh' ? '打开模板市场' : 'Open template marketplace')}>{logo && <img src={logo} alt="" />}<span>{name}</span></Link>}
+    <footer className="counsel-footer"><div className="counsel-footer-inner"><div className="counsel-footer-brand"><Link href={target('')}><img src={logo} alt="" /><strong>{name}</strong></Link><p>{i ? 'Private coaching for founders and leaders.' : '让每一次领导决策更有方向'}</p></div><div className="counsel-footer-links"><div><small>{i ? 'THE HOUSE' : '探索'}</small>{links.slice(1,4).map(([path,zh,en])=><Link href={target(path)} key={path}>{i?en:zh}</Link>)}</div><div><small>{i?'PROGRAMMES':'服务项目'}</small><Link href={target('programmes')}>{i?'The Programmes':'服务项目'}</Link><Link href={target('enquire')}>{i?'Request a Conversation':'预约一次对话'}</Link></div><div><small>{i?'GET IN TOUCH':'联系我们'}</small><a href={`mailto:${email}`}>{email}</a><Link href={target('contact')}>{i?'Contact':'联系'}</Link><span className="counsel-sr-only">{phone}</span></div></div><div className="counsel-footer-bottom"><span>© {brand.copyrightYear} {name}. {i?'All rights reserved.':'保留所有权利。'}</span><Link href={target('privacy')}>{i?'Privacy':'隐私'}</Link></div>{footerExtra && <div className="counsel-footer-extra">{footerExtra}</div>}</div></footer>
+    {marketplaceHref && <Link className="counsel-marketplace" href={marketplaceHref} aria-label={marketplaceAriaLabel?.[locale] ?? (i ? 'Open template marketplace' : '打开模板市场')}><img src={logo} alt="" /><span>{name}</span></Link>}
   </div>
 }

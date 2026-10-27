@@ -1,7 +1,17 @@
-# The Counsel 模板
+# The Counsel
 
-响应式咨询服务网站，使用 Next.js、React 和 TypeScript，包含中英文路由、服务介绍、文章、联系及演示申请表。表单只在浏览器本地校验，不发送或保存数据。当前为开发版本，视觉、动效和验收仍在完善。
+中英文咨询服务模板，共 12 个页面。包含服务介绍、关于、工作形式、文章列表及四篇全文、申请、联系和隐私页。
 
-固定工具链为 Node 24.16.0、pnpm 9.15.4。运行 `corepack pnpm install --frozen-lockfile` 后，可用 `corepack pnpm dev` 启动本地预览；`corepack pnpm typecheck`、`corepack pnpm lint` 和 `corepack pnpm build` 执行检查。默认地址为 `http://127.0.0.1:43628`，用 Ctrl+C 停止。
+## 运行
 
-业务页面和内容位于 `src/features/counsel/`，页面入口为 `src/app/[[...slug]]/page.tsx`，素材及字体位于 `public/templates/counsel/`。修改前阅读 `.tpl/README.md`、`.tpl/template.json` 和 `.tpl/project.json`；素材来源见 `docs/ASSETS.md`。
+固定 Node 24.16.0、pnpm 9.15.4。执行 `pnpm install --frozen-lockfile`，开发运行 `pnpm dev`；`pnpm build` 后 `pnpm start`。默认端口 43628，可用 PORT 指定；停止使用 Ctrl+C。构建与打包在本地 WSL Linux 文件系统执行。
+
+## 检查与修改
+
+`pnpm typecheck`、`pnpm lint`、`pnpm test`、`pnpm build`。包出口为 template、site、host；HostProvider 支持品牌、Logo、联系方式和页脚注入。页面和主题位于 src/features/counsel，修改映射见 .tpl/customization.json。
+
+## 行为边界
+
+表单仅在浏览器校验，不发送、不保存。没有后端、数据库或视频播放器。文字错峰、滚动入场、照片旋转、图标缩放、双向图廊、评价循环和菜单动画支持减少动态效果。字体按制作要求使用 MiSans/Poppins，因此排版与参考站衬线体有意不同。
+
+素材来源见 docs/ASSETS.md；许可见 .tpl/docs/LICENSE.md。展示素材位于 .tpl/assets。

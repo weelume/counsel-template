@@ -2,13 +2,13 @@
   "$schema": "./schemas/project.schema.json",
   "format": "git-template-project",
   "formatVersion": "0.2.0",
-  "stage": "scaffold",
+  "stage": "ready",
   "toolchain": {
     "runtime": "node",
     "runtimeVersionFile": ".nvmrc",
     "packageManager": "pnpm",
     "packageManagerSource": "package.json",
-    "lockfile": null
+    "lockfile": "pnpm-lock.yaml"
   },
   "environment": {
     "schema": ".tpl/contracts/env.schema.json",
@@ -16,8 +16,188 @@
   },
   "customization": ".tpl/customization.json",
   "requirements": {},
-  "previews": [],
-  "operations": {},
-  "services": {},
-  "checks": []
+  "previews": [
+    {
+      "surfaceId": "site",
+      "service": "web",
+      "localePaths": {
+        "zh": "/",
+        "en": "/en"
+      }
+    }
+  ],
+  "operations": {
+    "install": {
+      "cwd": ".",
+      "argv": [
+        "pnpm",
+        "install",
+        "--frozen-lockfile"
+      ],
+      "dependsOn": [],
+      "timeoutSeconds": 300,
+      "requiredEnv": [],
+      "effects": {
+        "network": true,
+        "persistentData": false
+      },
+      "requiresTools": [
+        "node",
+        "pnpm"
+      ]
+    },
+    "typecheck": {
+      "cwd": ".",
+      "argv": [
+        "pnpm",
+        "run",
+        "typecheck"
+      ],
+      "dependsOn": [],
+      "timeoutSeconds": 300,
+      "requiredEnv": [],
+      "effects": {
+        "network": false,
+        "persistentData": false
+      },
+      "requiresTools": [
+        "node",
+        "pnpm"
+      ]
+    },
+    "lint": {
+      "cwd": ".",
+      "argv": [
+        "pnpm",
+        "run",
+        "lint"
+      ],
+      "dependsOn": [],
+      "timeoutSeconds": 300,
+      "requiredEnv": [],
+      "effects": {
+        "network": false,
+        "persistentData": false
+      },
+      "requiresTools": [
+        "node",
+        "pnpm"
+      ]
+    },
+    "test": {
+      "cwd": ".",
+      "argv": [
+        "pnpm",
+        "run",
+        "test"
+      ],
+      "dependsOn": [],
+      "timeoutSeconds": 300,
+      "requiredEnv": [],
+      "effects": {
+        "network": false,
+        "persistentData": false
+      },
+      "requiresTools": [
+        "node",
+        "pnpm"
+      ]
+    },
+    "build": {
+      "cwd": ".",
+      "argv": [
+        "pnpm",
+        "run",
+        "build"
+      ],
+      "dependsOn": [],
+      "timeoutSeconds": 600,
+      "requiredEnv": [],
+      "effects": {
+        "network": false,
+        "persistentData": false
+      },
+      "requiresTools": [
+        "node",
+        "pnpm"
+      ]
+    },
+    "bundle": {
+      "cwd": ".",
+      "argv": [
+        "pnpm",
+        "run",
+        "bundle"
+      ],
+      "dependsOn": [],
+      "timeoutSeconds": 300,
+      "requiredEnv": [],
+      "effects": {
+        "network": false,
+        "persistentData": false
+      },
+      "requiresTools": [
+        "node",
+        "pnpm",
+        "git"
+      ]
+    },
+    "verify": {
+      "cwd": ".",
+      "argv": [
+        "pnpm",
+        "run",
+        "test"
+      ],
+      "dependsOn": [],
+      "timeoutSeconds": 300,
+      "requiredEnv": [],
+      "effects": {
+        "network": false,
+        "persistentData": false
+      },
+      "requiresTools": [
+        "node",
+        "pnpm"
+      ]
+    }
+  },
+  "services": {
+    "web": {
+      "cwd": ".",
+      "argv": [
+        "pnpm",
+        "start"
+      ],
+      "dependsOn": [],
+      "prepareOperations": [
+        "build"
+      ],
+      "requiredEnv": [],
+      "effects": {
+        "network": false,
+        "persistentData": false
+      },
+      "port": {
+        "env": "PORT",
+        "default": 43628
+      },
+      "ready": {
+        "kind": "http",
+        "path": "/",
+        "status": 200,
+        "timeoutSeconds": 60
+      },
+      "requiresTools": [
+        "node",
+        "pnpm"
+      ]
+    }
+  },
+  "checks": [
+    "typecheck",
+    "lint",
+    "test",
+    "build"
+  ]
 }

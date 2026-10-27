@@ -3,7 +3,7 @@
   "format": "git-template",
   "formatVersion": "0.2.0",
   "id": "counsel",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "name": "The Counsel",
   "gitUrl": "https://github.com/weelume/counsel-template",
   "sceneId": "corporate-site",
@@ -13,10 +13,95 @@
     "中英文",
     "响应式"
   ],
-  "summary": "面向创始人与领导者的咨询服务网站开发版本",
+  "summary": "面向创始人与领导者的中英文咨询服务网站，含服务、完整文章、联系和本地预约演示",
   "accentColor": "#a88742",
-  "cover": null,
-  "screenshots": [],
+  "cover": "assets/desktop-home.webp",
+  "screenshots": [
+    {
+      "src": "assets/desktop-home.webp",
+      "alt": "首页",
+      "device": "desktop",
+      "width": 1430,
+      "height": 993
+    },
+    {
+      "src": "assets/desktop-programmes.webp",
+      "alt": "服务项目",
+      "device": "desktop",
+      "width": 1430,
+      "height": 993
+    },
+    {
+      "src": "assets/desktop-journal.webp",
+      "alt": "文章",
+      "device": "desktop",
+      "width": 1430,
+      "height": 993
+    },
+    {
+      "src": "assets/desktop-contact.webp",
+      "alt": "联系",
+      "device": "desktop",
+      "width": 1430,
+      "height": 993
+    },
+    {
+      "src": "assets/tablet-home.webp",
+      "alt": "首页",
+      "device": "tablet",
+      "width": 824,
+      "height": 1166
+    },
+    {
+      "src": "assets/tablet-programmes.webp",
+      "alt": "服务项目",
+      "device": "tablet",
+      "width": 824,
+      "height": 1166
+    },
+    {
+      "src": "assets/tablet-journal.webp",
+      "alt": "文章",
+      "device": "tablet",
+      "width": 824,
+      "height": 1166
+    },
+    {
+      "src": "assets/tablet-contact.webp",
+      "alt": "联系",
+      "device": "tablet",
+      "width": 824,
+      "height": 1166
+    },
+    {
+      "src": "assets/mobile-home.webp",
+      "alt": "首页",
+      "device": "mobile",
+      "width": 380,
+      "height": 822
+    },
+    {
+      "src": "assets/mobile-programmes.webp",
+      "alt": "服务项目",
+      "device": "mobile",
+      "width": 380,
+      "height": 822
+    },
+    {
+      "src": "assets/mobile-journal.webp",
+      "alt": "文章",
+      "device": "mobile",
+      "width": 380,
+      "height": 822
+    },
+    {
+      "src": "assets/mobile-contact.webp",
+      "alt": "联系",
+      "device": "mobile",
+      "width": 380,
+      "height": 822
+    }
+  ],
   "surfaces": [
     {
       "id": "site",
@@ -79,9 +164,9 @@
     }
   ],
   "license": {
-    "type": "unlicensed",
+    "type": "commercial",
     "file": "docs/LICENSE.md",
-    "summary": "待作者确认源码与素材授权范围。",
-    "redistributionAllowed": false
+    "summary": "按委托人的授权交付源码与参考素材；第三方素材权利保留，详见许可说明。",
+    "redistributionAllowed": true
   }
 }

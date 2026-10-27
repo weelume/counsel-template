@@ -1,5 +1,19 @@
-# The Counsel 使用说明
+# The Counsel
 
-此工程是中英文响应式咨询服务网站的开发版本。包含首页、服务、关于、工作内容、文章及四篇详情、申请、联系和隐私页面；申请和订阅表单仅在本地校验，不发送或保存。完整动效、展示截图和宿主接入尚未验收，因此合同阶段为 scaffold。
+中英文咨询服务模板，共 12 个页面。包含服务介绍、关于、工作形式、文章列表及四篇全文、申请、联系和隐私页。
 
-请先阅读根目录 README、`.tpl/project.json` 和 `.tpl/template.json`。使用固定 Node/pnpm 版本运行根目录 README 中的安装、启动与检查命令。常见修改入口见 `.tpl/docs/CUSTOMIZATION.md`，素材来源和授权声明见 `docs/ASSETS.md` 与 `.tpl/docs/LICENSE.md`。
+请先阅读 template.json、project.json 和 customization.json。
+
+## 运行
+
+固定 Node 24.16.0、pnpm 9.15.4。执行 `pnpm install --frozen-lockfile`，开发运行 `pnpm dev`；`pnpm build` 后 `pnpm start`。默认端口 43628，可用 PORT 指定；停止使用 Ctrl+C。构建与打包在本地 WSL Linux 文件系统执行。
+
+## 检查与修改
+
+`pnpm typecheck`、`pnpm lint`、`pnpm test`、`pnpm build`。包出口为 template、site、host；HostProvider 支持品牌、Logo、联系方式和页脚注入。页面和主题位于 src/features/counsel，修改映射见 .tpl/customization.json。
+
+## 行为边界
+
+表单仅在浏览器校验，不发送、不保存。没有后端、数据库或视频播放器。文字错峰、滚动入场、照片旋转、图标缩放、双向图廊、评价循环和菜单动画支持减少动态效果。字体按制作要求使用 MiSans/Poppins，因此排版与参考站衬线体有意不同。
+
+素材来源见 docs/ASSETS.md；许可见 .tpl/docs/LICENSE.md。展示素材位于 .tpl/assets。

@@ -1,9 +1,5 @@
 # 修改指南
 
-- 页面内容：`src/features/counsel/pages/PracticePages.tsx` 和 `content/articles.ts`，同时维护中英文。
-- 导航和页脚：`src/features/counsel/components/Shell.tsx`；宿主参数定义在 `types.ts`。
-- 颜色、字体、间距与响应式：`src/features/counsel/theme.css`。
-- 图片：`public/templates/counsel/`；替换时更新 `docs/ASSETS.md` 和许可说明。
-- 路由：`src/app/[[...slug]]/page.tsx` 与 `SitePage.tsx`。
+品牌：config/brand.ts；双语文章和业务：content/；页面组合：pages/；共享组件与动效：components/；主题：theme.css；页面注册：template.tsx 与 .tpl/template.json。以上源码均位于 src/features/counsel。图片在 public/templates/counsel，替换后维护 docs/ASSETS.md。
 
-修改后运行根目录 README 中的类型检查、lint 和构建，实际检查受影响页面与语言。
+新增页面同时登记两种语言，站内链接遵循挂载点。改动后运行 project.json 中相应检查。禁止把演示成功提示描述为已发送。

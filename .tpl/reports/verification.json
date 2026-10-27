@@ -1,0 +1,86 @@
+{
+  "$schema": "../schemas/verification.schema.json",
+  "format": "git-template-verification",
+  "formatVersion": "0.2.0",
+  "status": "passed",
+  "checkedAt": "2026-10-27T02:14:09.533Z",
+  "sourceCommit": null,
+  "sourceDigest": "bd1b8f430b8665766983750b176d8ad0c19c79ef81b4929d0a4f96dfc5c0d254",
+  "environment": {
+    "platform": "linux (local WSL)",
+    "arch": "x64",
+    "node": "24.16.0",
+    "packageManager": "pnpm@9.15.4",
+    "cleanDirectory": false,
+    "localGitClone": false
+  },
+  "checks": [
+    {
+      "id": "typecheck",
+      "cwd": ".",
+      "argv": [
+        "pnpm",
+        "run",
+        "typecheck"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "startedAt": "2026-10-27T02:11:23.000Z",
+      "finishedAt": "2026-10-27T02:11:25.000Z"
+    },
+    {
+      "id": "lint",
+      "cwd": ".",
+      "argv": [
+        "pnpm",
+        "run",
+        "lint"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "startedAt": "2026-10-27T02:11:25.000Z",
+      "finishedAt": "2026-10-27T02:11:27.000Z"
+    },
+    {
+      "id": "test",
+      "cwd": ".",
+      "argv": [
+        "pnpm",
+        "run",
+        "test"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "startedAt": "2026-10-27T02:11:27.000Z",
+      "finishedAt": "2026-10-27T02:11:27.000Z"
+    },
+    {
+      "id": "build",
+      "cwd": ".",
+      "argv": [
+        "pnpm",
+        "run",
+        "build"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "startedAt": "2026-10-27T02:11:27.000Z",
+      "finishedAt": "2026-10-27T02:11:47.000Z"
+    }
+  ],
+  "services": [
+    {
+      "id": "web",
+      "status": "passed",
+      "stopped": true,
+      "checkedAt": "2026-10-27T02:14:09.533Z"
+    }
+  ],
+  "limitations": [
+    "字体、标题比例、玻璃卡片和中文优先为制作要求的有意调整。",
+    "动画按内置浏览器观察重建；没有原设计工程，未声称逐帧、逐像素一致。",
+    "使用桌面浏览器视口模拟，未在实体触控设备验证惯性；系统减少动态效果分支已实现，未切换系统设置实测。",
+    "申请和订阅只在本地校验，不发送或保存。",
+    "构建使用独立 Linux 验收副本，不将其描述为全新远端克隆。"
+  ]
+}

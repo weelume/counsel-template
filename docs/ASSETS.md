@@ -14,3 +14,10 @@
 | `public/templates/counsel/logo.svg` | 参考站内嵌品牌 SVG，导出后添加命名空间及固定颜色 |
 
 浏览器协商返回的图片格式与源 URL 扩展名不同，文件按实际 MIME 类型命名。Poppins 许可证位于 `public/templates/counsel/fonts/Poppins-OFL.txt`；MiSans 来源和许可说明位于 `public/templates/counsel/fonts/misans/LICENSE-SOURCE.md`。
+
+## 关于页补充素材
+
+principles.png：https://framerusercontent.com/images/xz839Kv3XQ5OCldLxrFvZBmh8co.png
+origin-photo-1.png：https://framerusercontent.com/images/YUtBvNudkCNtmikFoofxQ7FBd8.png
+origin-photo-2.jpg：https://framerusercontent.com/images/ngXf97y1NIIdi13h086pLByc3I.jpg
+origin-photo-3.png：https://framerusercontent.com/images/mV4wfa4UyWeABYoGD8eUtQeoOKI.png
